@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include erp2thingscloud *.css
+recursive-include erp2thingscloud *.csv
+recursive-include erp2thingscloud *.html
+recursive-include erp2thingscloud *.ico
+recursive-include erp2thingscloud *.js
+recursive-include erp2thingscloud *.json
+recursive-include erp2thingscloud *.md
+recursive-include erp2thingscloud *.png
+recursive-include erp2thingscloud *.py
+recursive-include erp2thingscloud *.svg
+recursive-include erp2thingscloud *.txt
+recursive-exclude erp2thingscloud *.pyc
