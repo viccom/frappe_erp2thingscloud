@@ -6,5 +6,5 @@ from __future__ import unicode_literals
 # import frappe
 import unittest
 
-class TestErp2ThingscloudSettings(unittest.TestCase):
+class TestThingsCloudSettings(unittest.TestCase):
 	pass
