@@ -1,0 +1,52 @@
+{
+ "creation": "2020-04-07 16:36:22.466495",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "erp2thingscloud_settings",
+  "erp2thingscloud_url",
+  "authorization_code"
+ ],
+ "fields": [
+  {
+   "fieldname": "erp2thingscloud_settings",
+   "fieldtype": "Section Break",
+   "label": "Erp2Thingscloud Settings"
+  },
+  {
+   "fieldname": "erp2thingscloud_url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Erp2Thingscloud Url",
+   "reqd": 1
+  },
+  {
+   "fieldname": "authorization_code",
+   "fieldtype": "Data",
+   "label": "Authorization Code",
+   "reqd": 1
+  }
+ ],
+ "issingle": 1,
+ "modified": "2020-04-07 21:44:44.663571",
+ "modified_by": "Administrator",
+ "module": "Erp2Thingscloud",
+ "name": "Erp2Thingscloud Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
