@@ -6,7 +6,13 @@
  "field_order": [
   "erp2thingscloud_settings",
   "erp2thingscloud_url",
-  "authorization_code"
+  "authorization_code",
+  "cb1",
+  "server_status_html",
+  "server_status",
+  "thingscloud_status",
+  "cb2",
+  "thingscloud_updated"
  ],
  "fields": [
   {
@@ -27,10 +33,40 @@
    "in_list_view": 1,
    "label": "Authorization Code",
    "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "server_status_html",
+   "fieldtype": "HTML",
+   "label": "Server Status HTML"
+  },
+  {
+   "fieldname": "server_status",
+   "fieldtype": "Section Break",
+   "label": "Server Status"
+  },
+  {
+   "fieldname": "thingscloud_status",
+   "fieldtype": "Select",
+   "label": "ThingsCloud Status",
+   "options": "\nON\nOFF",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "thingscloud_updated",
+   "fieldtype": "Data",
+   "label": "ThingsCloud Updated"
   }
  ],
  "issingle": 1,
- "modified": "2020-04-07 22:40:00.308179",
+ "modified": "2020-04-08 11:16:33.507758",
  "modified_by": "Administrator",
  "module": "Erp2Thingscloud",
  "name": "ThingsCloud Settings",
