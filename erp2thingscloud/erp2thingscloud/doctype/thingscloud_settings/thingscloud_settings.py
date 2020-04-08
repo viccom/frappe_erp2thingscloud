@@ -52,7 +52,7 @@ def get_thingscloud_status():
 			frappe.logger(__name__).error("ThingsCloud Configuration missing in ThingsCloudSettings")
 			return
 
-		r = requests.session().get(inf_server + "/query", params={"q": '''SHOW USERS'''}, timeout=1)
+		r = requests.session().get(inf_server + "/", params={"q": '''SHOW USERS'''}, timeout=1)
 		return r.status_code == 200
 	except Exception:
 		return False

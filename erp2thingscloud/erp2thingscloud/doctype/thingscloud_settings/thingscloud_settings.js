@@ -22,7 +22,7 @@ frappe.ui.form.on('ThingsCloud Settings', {
 
 		var thingscloud_status = frm.doc.thingscloud_status  || 'none';
 		var s = $(repl(grid_html, {title: __("ThingsCloud"), status: thingscloud_status.toLowerCase()}));
-		$(frm.fields_dict['server_status_html'].wrapper).append(s);
+		$(frm.fields_dict['server_status_html'].wrapper).html(s);
 
 	},
 	refresh_status: function(frm) {
