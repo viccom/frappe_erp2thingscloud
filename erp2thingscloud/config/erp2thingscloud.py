@@ -16,5 +16,16 @@ def get_data():
 					"description": _("ThingsCloud Settings"),
 				}
 			]
-		}
+		},
+		{
+			"label": _("Serial Number list"),
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Serial Number list",
+					"onboard": 1,
+					"description": _("Serial Number list"),
+				}
+			]
+		},
 	]

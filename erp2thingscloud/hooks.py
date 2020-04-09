@@ -79,34 +79,39 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	# "*": {
+	# 	"on_update": "method",
+	# 	"on_cancel": "method",
+	# 	"on_trash": "method"
+	# },
+	"Serial No": {
+		"after_insert": "erp2thingscloud.controllers.item_serial_event_hooks.after_insert",
+		"after_delete": "erp2thingscloud.controllers.item_serial_event_hooks.after_delete"
+	}
+
+}
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"erp2thingscloud.tasks.all"
-# 	],
-# 	"daily": [
-# 		"erp2thingscloud.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"erp2thingscloud.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"erp2thingscloud.tasks.weekly"
-# 	]
-# 	"monthly": [
-# 		"erp2thingscloud.tasks.monthly"
-# 	]
-# }
+scheduler_events = {
+	"all": [
+		"erp2thingscloud.tasks.repost.send2thingscloud"
+	],
+	# "daily": [
+	# 	"erp2thingscloud.tasks.daily"
+	# ],
+	# "hourly": [
+	# 	"erp2thingscloud.tasks.hourly"
+	# ],
+	# "weekly": [
+	# 	"erp2thingscloud.tasks.weekly"
+	# ]
+	# "monthly": [
+	# 	"erp2thingscloud.tasks.monthly"
+	# ]
+}
 
 # Testing
 # -------
