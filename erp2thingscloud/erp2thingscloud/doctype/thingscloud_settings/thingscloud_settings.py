@@ -30,6 +30,13 @@ class ThingsCloudSettings(Document):
 		return gen_server_url(url, "http", 80)
 	pass
 
+	@staticmethod
+	def get_authorization_code():
+		auth = frappe.db.get_single_value("ThingsCloud Settings", "authorization_code")
+		if not auth:
+			return None
+		return auth
+	pass
 
 def gen_server_url(server, protocol, port):
 	m = re.search("^(.+)://(.+)$", server)

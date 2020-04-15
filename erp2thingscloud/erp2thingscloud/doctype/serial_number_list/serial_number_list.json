@@ -10,20 +10,24 @@
  "fields": [
   {
    "fieldname": "serial_no",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Serial No",
-   "reqd": 1
+   "options": "Serial No",
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "sync_status",
-   "fieldtype": "Data",
-   "in_list_view": 1,
+   "fieldtype": "Select",
    "label": "Sync Status",
+   "options": "\nsuccessful\nfailed",
    "reqd": 1
   }
  ],
- "modified": "2020-04-09 17:32:03.615413",
+ "modified": "2020-04-15 11:30:40.485390",
  "modified_by": "Administrator",
  "module": "Erp2Thingscloud",
  "name": "Serial Number list",

@@ -5,3 +5,6 @@
 *.swp
 tags
 erp2thingscloud/docs/current
+
+_package.cmd
+frappe_erp2thingscloud.zip

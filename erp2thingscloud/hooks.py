@@ -96,9 +96,9 @@ doc_events = {
 # ---------------
 
 scheduler_events = {
-	"all": [
-		"erp2thingscloud.tasks.repost.send2thingscloud"
-	],
+	# "all": [
+	# 	"erp2thingscloud.tasks.repost.send2thingscloud"
+	# ],
 	# "daily": [
 	# 	"erp2thingscloud.tasks.daily"
 	# ],
