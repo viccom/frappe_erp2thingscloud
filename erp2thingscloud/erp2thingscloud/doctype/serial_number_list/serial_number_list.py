@@ -7,4 +7,8 @@ from __future__ import unicode_literals
 from frappe.model.document import Document
 
 class SerialNumberlist(Document):
-	pass
+
+	@staticmethod
+	def repost_serialno(self):
+		print("@@@repost_serialno@@@")
+		pass

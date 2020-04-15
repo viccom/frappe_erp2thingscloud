@@ -3,25 +3,27 @@
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
+ "autoname": "field:serial_no",
  "field_order": [
   "serial_no",
   "sync_status"
  ],
  "fields": [
-  {
+{
    "fieldname": "serial_no",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Serial No",
-   "options": "Serial No",
    "reqd": 1,
-   "search_index": 1
+   "unique": 1
   },
   {
    "fieldname": "sync_status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Sync Status",
    "options": "\nsuccessful\nfailed",
    "reqd": 1
