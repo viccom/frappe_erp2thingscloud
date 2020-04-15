@@ -11,6 +11,14 @@ from erp2thingscloud.erp2thingscloud.doctype.thingscloud_settings.thingscloud_se
 
 def after_insert(doc, method):
 	print("@@@serial_no add:::", doc.serial_no, doc.item_code, doc.batch_no, doc.item_name, doc.supplier, doc.item_code)
+	# sn_exists = frappe.db.get_value("Serial Number list", {"serial_no": doc.serial_no}, "serial_no")
+	# if not sn_exists:
+	# 	print("@@@ add new record @@@@ initialized :::", doc.serial_no)
+	# 	serialno_doc = frappe.get_doc(
+	# 		{"doctype": "Serial Number list", "serial_no": doc.serial_no, "sync_status": 'initialized'})
+	# 	serialno_doc.insert(ignore_permissions=True)
+	# 	serialno_doc.save()
+	# time.sleep(5)
 	frappe.enqueue('erp2thingscloud.controllers.item_serial_event_hooks.post_serial', serialno=doc.serial_no, supplier=doc.supplier)
 
 
@@ -55,7 +63,7 @@ def post_serial(serialno, supplier, max_retry=1, sleep=None):
 				print("----------------------1-------------------------")
 				print("@@@set serialno failed :::", serialno)
 				print("-----------------------------------------------")
-				sn_exists = frappe.db.get_value("Serial Number list", {"serial_no": serialno})
+				sn_exists = frappe.db.get_value("Serial Number list", {"serial_no": serialno}, "serial_no")
 				print("-----------------------------------------------")
 				print("@@@ sn_exists @@@@ :::", sn_exists)
 				print("-----------------------------------------------")
@@ -63,13 +71,18 @@ def post_serial(serialno, supplier, max_retry=1, sleep=None):
 					serialno_doc = frappe.get_doc(
 						{"doctype": "Serial Number list", "serial_no": serialno, "sync_status": 'failed'})
 					serialno_doc.insert(ignore_permissions=True)
-			throw(r.text)
+				else:
+					serialno_doc = frappe.get_doc("Serial Number list", serialno)
+					print("##################::::::::", serialno_doc.sync_status)
+					serialno_doc.set("sync_status", 'failed')
+					serialno_doc.save()
+			# throw(r.text)
 		else:
 			frappe.logger(__name__).debug(r.text)
 			print("----------------------2-------------------------")
 			print("@@@set serialno successful :::", serialno)
 			print("-----------------------------------------------")
-			sn_exists = frappe.db.get_value("Serial Number list", {"serial_no": serialno})
+			sn_exists = frappe.db.get_value("Serial Number list", {"serial_no": serialno}, "serial_no")
 			print("-----------------------------------------------")
 			print("@@@ sn_exists @@@@ :::", sn_exists)
 			print("-----------------------------------------------")
@@ -79,23 +92,37 @@ def post_serial(serialno, supplier, max_retry=1, sleep=None):
 				serialno_doc.insert(ignore_permissions=True)
 			else:
 				serialno_doc = frappe.get_doc("Serial Number list", serialno)
-				serialno_doc.update({"sync_status": 'successful'})
+				print("##################::::::::", serialno_doc.sync_status)
+				serialno_doc.set("sync_status", 'successful')
 				serialno_doc.save()
-				pass
+
 	except Exception as ex:
+		print("-----------------------3------------------------")
+		print("@@@set serialno failed :::", serialno)
+		print("-----------------------------------------------")
+		sn_exists = frappe.db.get_value("Serial Number list", {"serial_no": serialno}, "serial_no")
+		print("@@@ sn_exists @@@@ :::", sn_exists)
+		if not sn_exists:
+			print("@@@ add new record @@@@ :::", serialno)
+			serialno_doc = None
+			try:
+				serialno_doc = frappe.get_doc(
+					{"doctype": "Serial Number list", "serial_no": serialno, "sync_status": 'failed'})
+			except Exception as err:
+				print("@@@ Exception @@@@ :::", str(err))
+			finally:
+				if serialno_doc:
+					print("!!!!!!!!!!!!!!!!!!!!!!!!!!save")
+					serialno_doc.insert(ignore_permissions=True)
+		else:
+			serialno_doc = frappe.get_doc("Serial Number list", serialno)
+			print("##################::::::::", serialno_doc.sync_status)
+			serialno_doc.set("sync_status", 'failed')
+			serialno_doc.save()
 		frappe.logger(__name__).error(ex)
 		if max_retry > 0:
 			frappe.enqueue('erp2thingscloud.controllers.item_serial_event_hooks.post_serial', serialno=serialno, supplier=supplier, max_retry=max_retry, sleep=60)
-		else:
-			print("-----------------------3------------------------")
-			print("@@@set serialno failed :::", serialno)
-			print("-----------------------------------------------")
-			sn_exists = frappe.db.get_value("Serial Number list", {"serial_no": serialno}, "serial_no")
-			if not sn_exists:
-				serialno_doc = frappe.get_doc(
-					{"doctype": "Serial Number list", "serial_no": serialno, "sync_status": 'failed'})
-				serialno_doc.insert(ignore_permissions=True)
-		throw(repr(ex))
+		# throw(repr(ex))
 
 
 def delete_serial(serialno, supplier, max_retry=10, sleep=None):
